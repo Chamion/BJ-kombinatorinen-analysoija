@@ -1,6 +1,9 @@
 Blackjack on uhkapeli, jossa on mahdollista saada pelaajana yli 100% teoreettinen palautus, jos jäljellä oleva pakka on pelaajalle edullinen. Ohjelman tulisi kertoa käyttäjälle mitkä ovat jakajan käden todennäköisyydet käyttäjän syöttämällä pakalla. Jakajan käden todennäköisyydet ovat tärkeä osa blackjack pelin teoreettisen palautuksen laskemista. Teoreettisen palautuksen laskeminen olisi kuitenkin liian suuri projekti kurssin aikana toteutettavaksi.
 
 
+Ohjelman toteutus tapahtuu Java-kielellä, koska Java on kieli, jolla minulla on kattavin kokemus testien tekemisestä.
+
+
 Ohjelma saa syötteenään jakajan ensimmäisen kortin ja pakassa jäljellä olevien korttien arvot.
 
 
