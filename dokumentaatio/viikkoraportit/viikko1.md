@@ -13,3 +13,6 @@ Selkeä ongelma projektissa on aiheen mielenkiinnottomuus ulkopuolisen silmin.
 Ohjelma on ollut ideatasolla hautumassa jo vuosia, mutta ohjelmointitaidot ja matemaattinen ymmärrys eivät ole riittäneet sen toteuttamiseen.
 Suuri osa projektin suunnittelusta on vielä abstraktilla tasolla ja/tai piirroksina työpöydällä.
 Nämä ajatukset ja piirrokset tulisi saattaa GitHub-kelpoisiksi kaavioiksi.
+
+
+Demotilaisuuden ajankohta on hämmentävä. Materiaalissa lukee, että se ilmoitetaan myöhemmin. Missä ja milloin ajankohta ilmoitetaan?
