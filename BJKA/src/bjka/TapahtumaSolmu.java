@@ -12,28 +12,39 @@ package bjka;
 public class TapahtumaSolmu {
     
     private final int arvo;
-    private Pakka pakka;
-    private TapahtumaSolmu[] seuraavat;
-    private double[] todennakoisyydet;
+    private final boolean assa;
+    private double todennakoisyys;
+    private final Pakka pakka;
     
-    public TapahtumaSolmu(int arvo){
+    public TapahtumaSolmu(int arvo, boolean assa, double todennakoisyys, Pakka pakka){
         this.arvo = arvo;
-    }
-    
-    public TapahtumaSolmu(int arvo, Pakka pakka){
-        this.arvo = arvo;
+        this.assa = assa;
         this.pakka = pakka;
-        this.seuraavat = new TapahtumaSolmu[10];
+        this.todennakoisyys = todennakoisyys;
     }
     
-    public void laskeTodennakoisyydet(){
-        this.todennakoisyydet = pakka.todennakoisyysVektori();
-    }
-    
-    public void sido(int kortti, TapahtumaSolmu seuraava){
-        if(kortti < 0 || kortti >= 10){
-            kortti = 0;
+    public double[] laskeTodennakoisyydet(){
+        double[] tVektori = this.pakka.todennakoisyysVektori();
+        for(int i = 0; i <= 9; i++){
+            tVektori[i] = tVektori[i]*this.todennakoisyys;
         }
-        this.seuraavat[kortti] = seuraava;
+        return tVektori;
     }
+    
+    public Pakka seuraavaPakka(int kortti){
+        return this.pakka.poistaKortti(kortti);
+    }
+    
+    public void lisaaTodennakoisyys(double lisays){
+        this.todennakoisyys += lisays;
+    }
+    
+    public int getArvo(){
+        return this.arvo;
+    }
+    
+    public boolean getAssa(){
+        return this.assa;
+    }
+    
 }

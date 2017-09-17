@@ -30,11 +30,6 @@ public class Pakka {
         return tVektori;
     }
     
-    public double alaspainTodennakoisyys(int kortti){
-        kortti = siivoaKortti(kortti);
-        return (double) (this.lukumaarat[kortti]+1)/(koko+1);
-    }
-    
     public Pakka poistaKortti(int kortti){
         kortti = siivoaKortti(kortti);
         int[] uudetLukumaarat = this.lukumaarat.clone();
