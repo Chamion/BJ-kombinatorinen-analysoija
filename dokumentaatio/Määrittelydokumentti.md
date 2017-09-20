@@ -16,13 +16,16 @@ Ohjelma antaa ulostulona jakajan käden mahdolliset arvot ja niiden todennäköi
 Esim. 17: 0.138, 18: 0.138, 19: 0.138, 20: 0.138, 21: 0.138, BJ: 0.0, yli: 0.31
 
 
-Ohjelma tulee hyödyntämään rekursiivista algoritmia, joka analysoi kaikkien mahdollisten tapahtumahaarojen todennäköisyydet ja arvot kutsumalla samaa metodia uudestaan eri arvoilla.
-Lisäksi ohjelma vaatii suunnatun verkon tai puun, mihin tallennetaan välituloksia, sillä rekursiivinen algoritmi yksinään laskisi samoja välituloksia monesti ja siten ajautuisi suorituskykyongelmiin.
+~~Ohjelma tulee hyödyntämään rekursiivista algoritmia, joka analysoi kaikkien mahdollisten tapahtumahaarojen todennäköisyydet ja arvot kutsumalla samaa metodia uudestaan eri arvoilla.~~
+Ohjelma hyödyntää jono-tietorakennetta suorittaakseen tapahtumaketjujen läpikäynnin leveys ensin.
+~~Lisäksi ohjelma vaatii suunnatun verkon tai puun, mihin tallennetaan välituloksia, sillä rekursiivinen algoritmi yksinään laskisi samoja välituloksia monesti ja siten ajautuisi suorituskykyongelmiin.~~
+Ohjelma tallentaa välituloksia map-tietorakenteeseen, jotta samoja välituloksia ei lasketa useasti.
 
 
 Lopullisen ohjelman tulisi soveltua käytettäväksi suuremmassa ohjelmassa, joka laskee sen avulla arvoja useasti, joten suorituskyky on moninkertaisesti tärkeä. 
-Rekursion tulisi suorittua lineaarisessa ajassa, kunhan välitulosten verkko/puu on laskettu. välituloksia tarvitaan määrä, joka on pienempi kuin mahdollisten tapahtumasarjojen määrä. Mahdollisten tapahtumasarjojen määrä riippuu syötteestä.
-Mahdollisia tapahtumasarjoja on luokkaa n^n, missä n on nostettujen korttien määrä. Aikavaativuus on siis eksponentiaalinen, mutta onneksi 1 <= n <= 10. Tilavaativuus on myös riippuvainen välitulosten tietorakenteen koosta ja käyttäytyy siis samoin kuin aikavaativuus.
-
+Ohjelma käy läpi kaikki tapahtumaketjujen solmut. Aikavaativuus riippuu siis tapahtumaketjujen solmujen lukumäärästä.
+~~Rekursion tulisi suorittua lineaarisessa ajassa, kunhan välitulosten verkko/puu on laskettu. välituloksia tarvitaan määrä, joka on pienempi kuin mahdollisten tapahtumasarjojen määrä.~~
+Mahdollisten tapahtumaketjujen solmujen määrä riippuu syötteestä.
+Mahdollisia tapahtumaketjujen solmuja on luokkaa n^9, missä n on nostettujen korttien määrä. Aikavaativuus on siis eksponentiaalinen, mutta onneksi 1 <= n <= 10. Tilavaativuus, kuten aikavaativuuskin, on riippuvainen välitulosten tietorakenteen koosta joka riippuu tapahtumaketjujen solmujen määrästä.
 
 Ohjelman toteutus tukee erinomaisesti kurssin tavoitteita ja lopullinen ohjelma menee toivottavasti hyvään käyttöön.
