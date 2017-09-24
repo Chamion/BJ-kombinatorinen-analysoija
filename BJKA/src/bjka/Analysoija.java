@@ -5,7 +5,7 @@
  */
 package bjka;
 
-import java.util.LinkedList;
+import tietorakenteet.Jono;
 import java.util.HashMap;
 
 /**
@@ -26,7 +26,7 @@ public class Analysoija {
         TapahtumaSolmu alkuSolmu = new TapahtumaSolmu(alkukortti, alkukortti == 1, 1.0, pakka);
 
         // Jonoon lisätään tapahtumasolmut, jotka jatkuvat vielä.
-        LinkedList<Integer> jono = new LinkedList();
+        Jono jono = new Jono(1000);
 
         // Tapahtumasolmut talletetaan Map-tietorakenteeseen, jotta alkion olemassaolon tarkistaminen on nopeampaa. O(1) vs. O(n)
         HashMap<Integer, TapahtumaSolmu> map = new HashMap();
@@ -41,7 +41,7 @@ public class Analysoija {
             tulos.lisaa(alkuSolmu.getArvo() + 10, alkuTVektori[0]);
         } else {
             map.put(alkukoodi + koodi(10), new TapahtumaSolmu(alkuSolmu.getArvo() + 10, false, alkuTVektori[0], alkuSolmu.seuraavaPakka(10)));
-            jono.add(alkukoodi + koodi(10));
+            jono.lisaa(alkukoodi + koodi(10));
         }
         if (alkukortti == 10) {
             tulos.lisaaBJ(alkuTVektori[1]);
@@ -49,7 +49,7 @@ public class Analysoija {
             tulos.lisaa(alkuSolmu.getArvo() + 11, alkuTVektori[1]);
         } else {
             map.put(alkukoodi + koodi(1), new TapahtumaSolmu(alkuSolmu.getArvo() + 1, true, alkuTVektori[1], alkuSolmu.seuraavaPakka(1)));
-            jono.add(alkukoodi + koodi(1));
+            jono.lisaa(alkukoodi + koodi(1));
         }
         for (int i = 2; i <= 9; i++) {
             kasitteleTapahtuma(i, alkuTVektori[i], alkukoodi, alkuSolmu, jono, map, tulos);
@@ -57,14 +57,14 @@ public class Analysoija {
 
         // Silmukka käy läpi kaikki mahdolliset tapahtumaketjut.
         while (!jono.isEmpty()) {
-            int seuraavaKoodi = jono.poll();
+            int seuraavaKoodi = jono.get();
             kasitteleTapahtumaHaara(seuraavaKoodi, jono, map, tulos);
         }
 
         return tulos;
     }
 
-    private void kasitteleTapahtuma(int tapahtuma, double tapahtumaTodennakoisyys, int lahtokoodi, TapahtumaSolmu lahtoSolmu, LinkedList jono, HashMap<Integer, TapahtumaSolmu> map, TulosVektori tulos) {
+    private void kasitteleTapahtuma(int tapahtuma, double tapahtumaTodennakoisyys, int lahtokoodi, TapahtumaSolmu lahtoSolmu, Jono jono, HashMap<Integer, TapahtumaSolmu> map, TulosVektori tulos) {
         // Todennäköisyysvektoreissa 10 on koodattu nollaksi. Käännetään takaisin.
         if (tapahtuma == 0) {
             tapahtuma = 10;
@@ -95,11 +95,11 @@ public class Analysoija {
         } else {
             // Jos tapahtumasolmu ei ole Map-oliossa, lisätään se myös jonoon käsiteltäväksi.
             map.put(uusiKoodi, new TapahtumaSolmu(uusiArvo, uusiAssa, tapahtumaTodennakoisyys, lahtoSolmu.seuraavaPakka(tapahtuma)));
-            jono.add(uusiKoodi);
+            jono.lisaa(uusiKoodi);
         }
     }
 
-    private void kasitteleTapahtumaHaara(int lahtokoodi, LinkedList jono, HashMap<Integer, TapahtumaSolmu> map, TulosVektori tulos) {
+    private void kasitteleTapahtumaHaara(int lahtokoodi, Jono jono, HashMap<Integer, TapahtumaSolmu> map, TulosVektori tulos) {
 
         TapahtumaSolmu lahtoSolmu = map.get(lahtokoodi);
         double[] tVektori = lahtoSolmu.laskeTodennakoisyydet();

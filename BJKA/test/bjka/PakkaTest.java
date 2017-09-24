@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bjkatest;
+package bjka;
 
-import bjka.Pakka;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,6 +44,13 @@ public class PakkaTest {
     public void poistaKorttiPienentaaKokoa() {
         assertEquals(311, this.pakka.poistaKortti(0).getKoko());
     }
+    
+    @Test
+    public void poistaKorttiVoiOttaaViimeisenKortin() {
+        Pakka yksiKortti = new Pakka(new int[]{1, 0, 0, 0, 0, 0, 0, 0, 0, 0});
+        yksiKortti = yksiKortti.poistaKortti(10);
+        assertEquals(new Pakka(new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0}), yksiKortti);
+    }
 
     @Test
     public void todennakoisyysVektoriAntaaOikeatTodennakoisyydet() {
@@ -61,5 +67,16 @@ public class PakkaTest {
             (double) 24 / 312
         };
         Assert.assertArrayEquals(oikeat, this.pakka.todennakoisyysVektori(), 0.0000001);
+    }
+    
+    @Test
+    public void todennakoisyysVektoriSietaaNollia() {
+        Pakka nollaPakka = new Pakka(new int[]{4, 0, 0, 0, 0, 0, 0, 0, 0, 0});
+        Assert.assertArrayEquals(new double[]{1, 0, 0, 0, 0, 0, 0, 0, 0, 0}, nollaPakka.todennakoisyysVektori(), 0.0000001);
+        nollaPakka = new Pakka(new int[]{0, 1, 0, 0, 0, 0, 0, 2, 0, 0});
+        Assert.assertArrayEquals(new double[]{0, (double) 1/3, 0, 0, 0, 0, 0, (double) 2/3, 0, 0}, nollaPakka.todennakoisyysVektori(), 0.0000001);
+        
+        // 0 kortin pakalla ei testata. Tyhjästä pakasta nostaminen on järjetön tilanne, joten ei voida olettaa järjellistä vastausta.
+        
     }
 }

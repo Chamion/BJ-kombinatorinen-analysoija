@@ -3,10 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package bjkatest;
+package bjka;
 
-import bjka.Pakka;
-import bjka.TapahtumaSolmu;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -41,5 +39,10 @@ public class TapahtumaSolmuTest {
             oikeat[i] = oikeat[i] * 0.2;
         }
         assertArrayEquals(oikeat, this.solmu.laskeTodennakoisyydet(), 0.00000001);
+    }
+    
+    @Test
+    public void seuraavaPakkaVastaaPakkaOlionMetodia() {
+        assertEquals(this.solmu.seuraavaPakka(2), this.solmu.getPakka().poistaKortti(2));
     }
 }

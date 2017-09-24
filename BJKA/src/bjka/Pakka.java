@@ -40,7 +40,7 @@ public class Pakka {
     public double[] todennakoisyysVektori() {
         double[] tVektori = new double[10];
         for (int i = 0; i <= 9; i++) {
-            tVektori[i] = (double) this.lukumaarat[i] / koko;
+            tVektori[i] = (double) this.lukumaarat[i] / this.koko;
         }
         return tVektori;
     }
@@ -53,20 +53,12 @@ public class Pakka {
      * @return Pakka, joka jää jäljelle kortin poistamisen jälkeen.
      */
     public Pakka poistaKortti(int kortti) {
-        kortti = siivoaKortti(kortti);
+        kortti = kortti % 10;
         int[] uudetLukumaarat = this.lukumaarat.clone();
 
         // Lukumäärä voi mennä negatiiviseksi. Tulos on kuitenkin aina oikein (negatiivinen todennäköisyys kerrotaan aina nollalla).
         uudetLukumaarat[kortti] -= 1;
         return new Pakka(uudetLukumaarat);
-    }
-
-    // Turha, refaktoroi pois.
-    private int siivoaKortti(int kortti) {
-        if (kortti < 0 || kortti >= 10) {
-            return 0;
-        }
-        return kortti;
     }
 
     public int[] getLukukumaarat() {
@@ -75,5 +67,23 @@ public class Pakka {
 
     public int getKoko() {
         return this.koko;
+    }
+    
+    @Override
+    public boolean equals(Object o){
+        if(o.getClass()==this.getClass()){
+            return this.equals((Pakka) o);
+        } else {
+            return false;
+        }
+    }
+    
+    private boolean equals(Pakka o){
+        for(int i = 0; i <= 9; i++){
+            if(this.lukumaarat[i] != o.getLukukumaarat()[i]){
+                return false;
+            }
+        }
+        return true;
     }
 }

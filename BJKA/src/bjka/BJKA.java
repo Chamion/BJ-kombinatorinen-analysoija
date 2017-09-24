@@ -18,8 +18,12 @@ public class BJKA {
         Analysoija analysoija = new Analysoija();
 
         // Jakajan kortti 10 ja jäljellä oleva pakka on 6 tavallista korttipakkaa.
+        long aika;
+        aika = System.nanoTime();
         TulosVektori tulos = analysoija.analysoi(10, new Pakka(new int[]{96, 24, 24, 24, 24, 24, 24, 24, 24, 24}));
-
+        
+        aika = System.nanoTime() - aika;
+        
         System.out.println("17: " + tulos.get(17));
         System.out.println("18: " + tulos.get(18));
         System.out.println("19: " + tulos.get(19));
@@ -28,6 +32,7 @@ public class BJKA {
         System.out.println("BJ: " + tulos.getBJ());
         System.out.println("Yli: " + tulos.get(22));
         System.out.println("Yhteensä:" + (tulos.get(17) + tulos.get(18) + tulos.get(19) + tulos.get(20) + tulos.get(21) + tulos.getBJ() + tulos.get(22)));
+        System.out.println("Aika: " + aika + " nanosekuntia");
     }
 
 }
