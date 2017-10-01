@@ -24,3 +24,25 @@ Käytännössä keksin ne yritys-erehdys menetelmällä.
 
 
 Lähtösolmu on käsiteltävä erikseen Blackjack-erikoistapauksen takia. Blackjack todennäköisyydet lasketaan kovakoodatulla logiikalla lähtösolmun käsittelyssä.
+
+
+# Aika- ja tilavaativuus
+
+Analysoija kutsuu kasitteleTapahtuma-metodia tasan kerran jokaista käsiteltävää TapahtumaSolmua kohti. Aikavaativuus on siis luokkaa O(k), missä k on TapahtumaSolmujen lukumäärä.
+Kaikki käsiteltävät TapahtumaSolmut tallennetaan taulukkoon, jonka koko on m samanaikaisesti. Voidaan siis todeta k <= m.
+Aikavaativuudeksi saadaan O(m).
+
+
+TIlavaativuus muodostuu analysoijan kahden tietorakenteen tilavaativuuksista.
+Taulukon koko on m ja jonoon tallennetaan vain taulukon indeksejä, eli jonon koko on pienempi tai yhtäsuuri kuin m.
+Tilavaativuudeksi saadaan siis O(m + m) = O(m).
+
+
+Kirjoitushetkellä m = 2206.
+
+# Parannettavaa
+
+m voisi olla pienempi, jos Korttien arvojen vastaavia lukuarvoja viilaisi. Parasta olisi ratkaista pienin m matemaattisesti. Näin tulisi samalla todistettua m olevan pienin mahdollinen.
+
+
+Ohjelma selvittää jakajan käden todennäköisyydet, mikä ei ole itsessään hyödyllistä, vaan vaatii vielä pelaajan käden todennäköisyyksien laskemisen, jotta saadaan selville rahanarvoista tietoa tietyn pakan kannattavuudesta pelaajalle.
