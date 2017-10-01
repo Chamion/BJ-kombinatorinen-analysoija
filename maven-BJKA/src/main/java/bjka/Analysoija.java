@@ -18,10 +18,10 @@ public class Analysoija {
 
     }
 
-    public TulosVektori analysoi(int alkukortti, Pakka pakka) {
+    public double[] analysoi(int alkukortti, Pakka pakka) {
 
         //Päättyneet tapahtumaketjut merkataan tulosvektoriin.
-        TulosVektori tulos = new TulosVektori();
+        double[] tulos = new double[]{0,0,0,0,0,0,0};
 
         TapahtumaSolmu alkuSolmu = new TapahtumaSolmu(alkukortti, alkukortti == 1, 1.0, pakka);
 
@@ -36,17 +36,17 @@ public class Analysoija {
         // Käsitellään ensimmäinen tapahtumasolmu erikseen BJ-erikoistapauksen takia.
         double[] alkuTVektori = alkuSolmu.laskeTodennakoisyydet();
         if (alkuSolmu.getAssa()) {
-            tulos.lisaaBJ(alkuTVektori[0]);
+            tulos[6] += alkuTVektori[0];
         } else if (alkuSolmu.getArvo() + 10 >= 17) {
-            tulos.lisaa(alkuSolmu.getArvo() + 10, alkuTVektori[0]);
+            tulos[tulosIndeksi(alkuSolmu.getArvo() + 10)] += alkuTVektori[0];
         } else {
             map.put(alkukoodi + koodi(10), new TapahtumaSolmu(alkuSolmu.getArvo() + 10, false, alkuTVektori[0], alkuSolmu.seuraavaPakka(10)));
             jono.lisaa(alkukoodi + koodi(10));
         }
         if (alkukortti == 10) {
-            tulos.lisaaBJ(alkuTVektori[1]);
+            tulos[6] += alkuTVektori[1];
         } else if (alkuSolmu.getArvo() + 11 >= 17) {
-            tulos.lisaa(alkuSolmu.getArvo() + 11, alkuTVektori[1]);
+            tulos[tulosIndeksi(alkuSolmu.getArvo() + 11)] += alkuTVektori[1];
         } else {
             map.put(alkukoodi + koodi(1), new TapahtumaSolmu(alkuSolmu.getArvo() + 1, true, alkuTVektori[1], alkuSolmu.seuraavaPakka(1)));
             jono.lisaa(alkukoodi + koodi(1));
@@ -64,7 +64,7 @@ public class Analysoija {
         return tulos;
     }
 
-    private void kasitteleTapahtuma(int tapahtuma, double tapahtumaTodennakoisyys, int lahtokoodi, TapahtumaSolmu lahtoSolmu, Jono jono, HashMap<Integer, TapahtumaSolmu> map, TulosVektori tulos) {
+    private void kasitteleTapahtuma(int tapahtuma, double tapahtumaTodennakoisyys, int lahtokoodi, TapahtumaSolmu lahtoSolmu, Jono jono, HashMap<Integer, TapahtumaSolmu> map, double[] tulos) {
         // Todennäköisyysvektoreissa 10 on koodattu nollaksi. Käännetään takaisin.
         if (tapahtuma == 0) {
             tapahtuma = 10;
@@ -75,12 +75,12 @@ public class Analysoija {
         // Jos jakaja jää, kirjataan tulos ja käsittely päättyy.
         if (lahtoSolmu.getAssa() || tapahtuma == 1) {
             if (uusiArvo >= 7 && uusiArvo <= 11) {
-                tulos.lisaa(uusiArvo + 10, tapahtumaTodennakoisyys);
+                tulos[tulosIndeksi(uusiArvo + 10)] += tapahtumaTodennakoisyys;
                 return;
             }
         }
         if (uusiArvo >= 17) {
-            tulos.lisaa(uusiArvo, tapahtumaTodennakoisyys);
+            tulos[tulosIndeksi(uusiArvo)] += tapahtumaTodennakoisyys;
             return;
         }
 
@@ -99,7 +99,7 @@ public class Analysoija {
         }
     }
 
-    private void kasitteleTapahtumaHaara(int lahtokoodi, Jono jono, HashMap<Integer, TapahtumaSolmu> map, TulosVektori tulos) {
+    private void kasitteleTapahtumaHaara(int lahtokoodi, Jono jono, HashMap<Integer, TapahtumaSolmu> map, double[] tulos) {
 
         TapahtumaSolmu lahtoSolmu = map.get(lahtokoodi);
         double[] tVektori = lahtoSolmu.laskeTodennakoisyydet();
@@ -143,6 +143,10 @@ public class Analysoija {
             default:
                 return 1000000000;
         }
+    }
+    
+    private int tulosIndeksi(int arvo){
+        return Math.min(22, arvo) - 17;
     }
 
 }

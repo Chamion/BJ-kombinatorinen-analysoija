@@ -48,6 +48,7 @@ public class PakkaTest {
     @Test
     public void poistaKorttiVoiOttaaViimeisenKortin() {
         Pakka yksiKortti = new Pakka(new int[]{1, 0, 0, 0, 0, 0, 0, 0, 0, 0});
+        assertFalse(yksiKortti.equals(yksiKortti.poistaKortti(10)));
         yksiKortti = yksiKortti.poistaKortti(10);
         assertEquals(new Pakka(new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0}), yksiKortti);
     }

@@ -17,21 +17,21 @@ public class BJKA {
     public static void main(String[] args) {
         Analysoija analysoija = new Analysoija();
 
-        // Jakajan kortti 10 ja jäljellä oleva pakka on 6 tavallista korttipakkaa.
+        // Jakajan kortti 1 ja jäljellä oleva pakka on 6 tavallista korttipakkaa.
         long aika;
         aika = System.nanoTime();
-        TulosVektori tulos = analysoija.analysoi(10, new Pakka(new int[]{96, 24, 24, 24, 24, 24, 24, 24, 24, 24}));
+        double[] tulos = analysoija.analysoi(10, new Pakka(new int[]{95, 24, 24, 24, 24, 24, 24, 24, 24, 24}));
         
         aika = System.nanoTime() - aika;
         
-        System.out.println("17: " + tulos.get(17));
-        System.out.println("18: " + tulos.get(18));
-        System.out.println("19: " + tulos.get(19));
-        System.out.println("20: " + tulos.get(20));
-        System.out.println("21: " + tulos.get(21));
-        System.out.println("BJ: " + tulos.getBJ());
-        System.out.println("Yli: " + tulos.get(22));
-        System.out.println("Yhteensä:" + (tulos.get(17) + tulos.get(18) + tulos.get(19) + tulos.get(20) + tulos.get(21) + tulos.getBJ() + tulos.get(22)));
+        System.out.println("17: " + tulos[0]);
+        System.out.println("18: " + tulos[1]);
+        System.out.println("19: " + tulos[2]);
+        System.out.println("20: " + tulos[3]);
+        System.out.println("21: " + tulos[4]);
+        System.out.println("BJ: " + tulos[6]);
+        System.out.println("Yli: " + tulos[5]);
+        System.out.println("Yhteensä:" + (tulos[0] + tulos[1] + tulos[2] + tulos[3] + tulos[4] + tulos[5] + tulos[6]));
         System.out.println("Aika: " + aika + " nanosekuntia");
     }
 
