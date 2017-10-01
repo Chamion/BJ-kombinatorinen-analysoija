@@ -6,7 +6,6 @@
 package bjka;
 
 import tietorakenteet.Jono;
-import java.util.HashMap;
 
 /**
  *
@@ -29,7 +28,7 @@ public class Analysoija {
         Jono jono = new Jono(1000);
 
         // Tapahtumasolmut talletetaan Map-tietorakenteeseen, jotta alkion olemassaolon tarkistaminen on nopeampaa. O(1) vs. O(n)
-        HashMap<Integer, TapahtumaSolmu> map = new HashMap();
+        TapahtumaSolmu[] map = new TapahtumaSolmu[2206];
 
         int alkukoodi = 0;
 
@@ -40,7 +39,7 @@ public class Analysoija {
         } else if (alkuSolmu.getArvo() + 10 >= 17) {
             tulos[tulosIndeksi(alkuSolmu.getArvo() + 10)] += alkuTVektori[0];
         } else {
-            map.put(alkukoodi + koodi(10), new TapahtumaSolmu(alkuSolmu.getArvo() + 10, false, alkuTVektori[0], alkuSolmu.seuraavaPakka(10)));
+            map[alkukoodi + koodi(10)] = new TapahtumaSolmu(alkuSolmu.getArvo() + 10, false, alkuTVektori[0], alkuSolmu.seuraavaPakka(10));
             jono.lisaa(alkukoodi + koodi(10));
         }
         if (alkukortti == 10) {
@@ -48,7 +47,7 @@ public class Analysoija {
         } else if (alkuSolmu.getArvo() + 11 >= 17) {
             tulos[tulosIndeksi(alkuSolmu.getArvo() + 11)] += alkuTVektori[1];
         } else {
-            map.put(alkukoodi + koodi(1), new TapahtumaSolmu(alkuSolmu.getArvo() + 1, true, alkuTVektori[1], alkuSolmu.seuraavaPakka(1)));
+            map[alkukoodi + koodi(1)] = new TapahtumaSolmu(alkuSolmu.getArvo() + 1, true, alkuTVektori[1], alkuSolmu.seuraavaPakka(1));
             jono.lisaa(alkukoodi + koodi(1));
         }
         for (int i = 2; i <= 9; i++) {
@@ -64,7 +63,7 @@ public class Analysoija {
         return tulos;
     }
 
-    private void kasitteleTapahtuma(int tapahtuma, double tapahtumaTodennakoisyys, int lahtokoodi, TapahtumaSolmu lahtoSolmu, Jono jono, HashMap<Integer, TapahtumaSolmu> map, double[] tulos) {
+    private void kasitteleTapahtuma(int tapahtuma, double tapahtumaTodennakoisyys, int lahtokoodi, TapahtumaSolmu lahtoSolmu, Jono jono, TapahtumaSolmu[] map, double[] tulos) {
         // Todennäköisyysvektoreissa 10 on koodattu nollaksi. Käännetään takaisin.
         if (tapahtuma == 0) {
             tapahtuma = 10;
@@ -89,19 +88,19 @@ public class Analysoija {
 
         boolean uusiAssa = lahtoSolmu.getAssa() || tapahtuma == 1;
 
-        if (map.containsKey(uusiKoodi)) {
+        if (map[uusiKoodi] != null) {
             // Jos tapahtumasolmu on jo Map-oliossa, ei lisätä sitä uudestaan, vaan päivitetään vain sen todennäköisyys.
-            map.get(uusiKoodi).lisaaTodennakoisyys(tapahtumaTodennakoisyys);
+            map[uusiKoodi].lisaaTodennakoisyys(tapahtumaTodennakoisyys);
         } else {
             // Jos tapahtumasolmu ei ole Map-oliossa, lisätään se myös jonoon käsiteltäväksi.
-            map.put(uusiKoodi, new TapahtumaSolmu(uusiArvo, uusiAssa, tapahtumaTodennakoisyys, lahtoSolmu.seuraavaPakka(tapahtuma)));
+            map[uusiKoodi] = new TapahtumaSolmu(uusiArvo, uusiAssa, tapahtumaTodennakoisyys, lahtoSolmu.seuraavaPakka(tapahtuma));
             jono.lisaa(uusiKoodi);
         }
     }
 
-    private void kasitteleTapahtumaHaara(int lahtokoodi, Jono jono, HashMap<Integer, TapahtumaSolmu> map, double[] tulos) {
+    private void kasitteleTapahtumaHaara(int lahtokoodi, Jono jono, TapahtumaSolmu[] map, double[] tulos) {
 
-        TapahtumaSolmu lahtoSolmu = map.get(lahtokoodi);
+        TapahtumaSolmu lahtoSolmu = map[lahtokoodi];
         double[] tVektori = lahtoSolmu.laskeTodennakoisyydet();
 
         // Käydään läpi ja käsitellään kaikki mahdolliset tapahtumat: 10, 1, 2, 3, 4, 5, 6, 7, 8, 9
@@ -123,25 +122,25 @@ public class Analysoija {
     private int koodi(int kortti) {
         switch (kortti) {
             case 1:
-                return 100000000;
-            case 2:
-                return 10000000;
-            case 3:
-                return 1000000;
-            case 4:
-                return 100000;
-            case 5:
-                return 10000;
-            case 6:
-                return 1000;
-            case 7:
-                return 100;
-            case 8:
-                return 10;
-            case 9:
                 return 1;
+            case 2:
+                return 9;
+            case 3:
+                return 31;
+            case 4:
+                return 109;
+            case 5:
+                return 246;
+            case 6:
+                return 602;
+            case 7:
+                return 880;
+            case 8:
+                return 1158;
+            case 9:
+                return 1484;
             default:
-                return 1000000000;
+                return 1603;
         }
     }
     

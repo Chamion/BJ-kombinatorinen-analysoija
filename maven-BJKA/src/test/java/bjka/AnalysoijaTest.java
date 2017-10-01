@@ -74,7 +74,7 @@ public class AnalysoijaTest {
             omatArvot[i] = analysoija.analysoi(i, alkuPakka.poistaKortti(i));
         }
         for(int i=0; i<=9; i++){
-            assertArrayEquals(wizardArvot[i], omatArvot[i], 0.000001);
+            assertArrayEquals(wizardArvot[i], omatArvot[i], 0.0000005);
         }
     }
     
