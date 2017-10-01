@@ -16,23 +16,22 @@ public class BJKA {
      */
     public static void main(String[] args) {
         Analysoija analysoija = new Analysoija();
-
+        Pakka alkuPakka = new Pakka(new int[]{96, 24, 24, 24, 24, 24, 24, 24, 24, 24});
+        Pakka[] pakat = new Pakka[11];
+        for(int i=1; i<=10; i++){
+            pakat[i] = alkuPakka.poistaKortti(i);
+        }
         // Jakajan kortti 1 ja jäljellä oleva pakka on 6 tavallista korttipakkaa.
         long aika;
         aika = System.nanoTime();
-        double[] tulos = analysoija.analysoi(10, new Pakka(new int[]{95, 24, 24, 24, 24, 24, 24, 24, 24, 24}));
+        
+        for(int i=1; i<=10; i++){
+            analysoija.analysoi(i, pakat[i]);
+        }
         
         aika = System.nanoTime() - aika;
         
-        System.out.println("17: " + tulos[0]);
-        System.out.println("18: " + tulos[1]);
-        System.out.println("19: " + tulos[2]);
-        System.out.println("20: " + tulos[3]);
-        System.out.println("21: " + tulos[4]);
-        System.out.println("BJ: " + tulos[6]);
-        System.out.println("Yli: " + tulos[5]);
-        System.out.println("Yhteensä:" + (tulos[0] + tulos[1] + tulos[2] + tulos[3] + tulos[4] + tulos[5] + tulos[6]));
-        System.out.println("Aika: " + aika + " nanosekuntia");
+        System.out.println("Todennäköisyyksien laskeminen jokaisella alkukortilla kesti " + aika + " nanosekuntia.");
     }
 
 }

@@ -80,4 +80,12 @@ public class PakkaTest {
         // 0 kortin pakalla ei testata. Tyhjästä pakasta nostaminen on järjetön tilanne, joten ei voida olettaa järjellistä vastausta.
         
     }
+    
+    @Test
+    public void pitKattavuusBoosteri() {
+        assertFalse(this.pakka.equals(this));
+        for(int i=0; i<=9; i++){
+            assertFalse(this.pakka.equals(this.pakka.poistaKortti(i)));
+        }
+    }
 }

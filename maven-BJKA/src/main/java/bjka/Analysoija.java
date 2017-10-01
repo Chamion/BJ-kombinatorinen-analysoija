@@ -87,7 +87,7 @@ public class Analysoija {
         // Uuden tapahtumasolmun kokonaislukukoodi. ks. koodi()
         int uusiKoodi = lahtokoodi + koodi(tapahtuma);
 
-        boolean uusiAssa = uusiArvo < 7 && (lahtoSolmu.getAssa() || tapahtuma == 1);
+        boolean uusiAssa = lahtoSolmu.getAssa() || tapahtuma == 1;
 
         if (map.containsKey(uusiKoodi)) {
             // Jos tapahtumasolmu on jo Map-oliossa, ei lisätä sitä uudestaan, vaan päivitetään vain sen todennäköisyys.
