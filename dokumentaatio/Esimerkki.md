@@ -6,7 +6,7 @@
 Alla on kaavio, joka esittää ohjelman etenemistä vaiheittain. Todellisuudessa ohjelma ei erittele käsittelyä vaiheisiin, vaan käsittelee solmuja yksi kerrallaan lisäysjärjestyksessä (ylhäältä alas, sarake kerrallaan.)
 
 
-![demokaavio 1](kaaaviot/demo1.png)
+![demokaavio 1](kaaviot/demo1.png)
 
 
 Kaaviosta on vaikea nähdä kaikkia nuolia. Alla on sama kaavio ilman päätössolmuja (17, 18, 19, 20 ,21, BJ, bust).

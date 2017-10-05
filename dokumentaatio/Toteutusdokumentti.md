@@ -26,6 +26,9 @@ Käytännössä keksin ne yritys-erehdys menetelmällä.
 Lähtösolmu on käsiteltävä erikseen Blackjack-erikoistapauksen takia. Blackjack todennäköisyydet lasketaan kovakoodatulla logiikalla lähtösolmun käsittelyssä.
 
 
+[Kuvitettu esimerkki toiminnasta](Esimerkki.md)
+
+
 # Aika- ja tilavaativuus
 
 Analysoija kutsuu kasitteleTapahtuma-metodia tasan kerran jokaista käsiteltävää TapahtumaSolmua kohti. Aikavaativuus on siis luokkaa O(k), missä k on TapahtumaSolmujen lukumäärä.
