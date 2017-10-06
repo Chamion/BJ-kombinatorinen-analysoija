@@ -9,7 +9,7 @@ package bjka;
  *
  * @author jemisalo
  */
-public class BJKA {
+public class Suorituskykytesti {
 
     /**
      * @param args the command line arguments
@@ -21,7 +21,6 @@ public class BJKA {
         for(int i=1; i<=10; i++){
             pakat[i] = alkuPakka.poistaKortti(i);
         }
-        // Jakajan kortti 1 ja jäljellä oleva pakka on 6 tavallista korttipakkaa.
         long aika;
         aika = System.nanoTime();
         
