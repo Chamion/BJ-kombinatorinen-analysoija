@@ -40,11 +40,12 @@ public class Main {
             System.out.println("Ensimmäistä riviä ei löytynyt.");
             return;
         } catch(NumberFormatException e) {
-            System.out.println("Ensimmäinen rivi ei esitä sopivaa alkukorttia.");
+            System.out.println("Ensimmäinen rivi ei ole kokonaisluku.");
             return;
         }
         if(alkukortti <= 0 || alkukortti > 10){
             System.out.println("Ensimmäinen rivi ei esitä sopivaa alkukorttia.");
+            return;
         }
         int[] lukumaarat = new int[10];
         try {
@@ -64,6 +65,7 @@ public class Main {
             System.out.println("Toisen rivin argumentti ei sisältänyt lukua.");
             return;
         }
+        lukija.close();
         Pakka pakka = new Pakka(lukumaarat);
         Analysoija analysoija = new Analysoija();
         double[] tulos = analysoija.analysoi(alkukortti, pakka);
