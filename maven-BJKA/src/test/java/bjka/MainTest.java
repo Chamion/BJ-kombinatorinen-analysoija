@@ -26,7 +26,6 @@ public class MainTest {
         tulostus  = new ByteArrayOutputStream();
     }
     
-    //StackOverflow CopyPastaa
     @Before
     public void setUp() {
         System.setOut(new PrintStream(tulostus));
@@ -35,7 +34,6 @@ public class MainTest {
     public void tearDown() {
         System.setOut(null);
     }
-    //CopyPasta loppuu
     
     @Test
     public void suorituskykyKutsutaanErikoissyotteella(){

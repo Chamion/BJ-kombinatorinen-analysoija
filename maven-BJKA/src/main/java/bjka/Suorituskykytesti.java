@@ -5,30 +5,21 @@
  */
 package bjka;
 
-/**
- *
- * @author jemisalo
- */
+import kello.KelloRajapinta;
+
+
 public class Suorituskykytesti {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
+    public static void suorituskykytesti(Pakka alkuPakka,int[] alkuKortit, Pakka[] pakat, KelloRajapinta kello) {
         Analysoija analysoija = new Analysoija();
-        Pakka alkuPakka = new Pakka(new int[]{96, 24, 24, 24, 24, 24, 24, 24, 24, 24});
-        Pakka[] pakat = new Pakka[11];
-        for(int i=1; i<=10; i++){
-            pakat[i] = alkuPakka.poistaKortti(i);
-        }
         long aika;
-        aika = System.nanoTime();
+        aika = kello.nanoTime();
         
-        for(int i=1; i<=10; i++){
-            analysoija.analysoi(i, pakat[i]);
+        for(int i=0; i<alkuKortit.length; i++){
+            analysoija.analysoi(alkuKortit[i], pakat[i]);
         }
         
-        aika = System.nanoTime() - aika;
+        aika = kello.nanoTime() - aika;
         
         System.out.println("Todennäköisyyksien laskeminen jokaisella alkukortilla kesti " + aika + " nanosekuntia.");
     }

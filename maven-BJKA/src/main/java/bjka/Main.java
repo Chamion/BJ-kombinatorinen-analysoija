@@ -5,6 +5,7 @@
  */
 package bjka;
 
+import kello.Kello;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.NoSuchElementException;
@@ -19,7 +20,13 @@ public class Main {
         String syotePath = "syöte.txt";
         if(args.length > 0){
             if(args[0].equals("suorituskyky")){
-                Suorituskykytesti.main(new String[]{});
+                Pakka alkuPakka = new Pakka(new int[]{96, 24, 24, 24, 24, 24, 24, 24, 24, 24});
+                Pakka[] pakat = new Pakka[10];
+                for(int i=0; i<10; i++){
+                    pakat[i] = alkuPakka.poistaKortti(i+1);
+                }
+                int[] alkuKortit = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+                Suorituskykytesti.suorituskykytesti(alkuPakka, alkuKortit, pakat, new Kello());
                 return;
             }
             syotePath = args[0];
