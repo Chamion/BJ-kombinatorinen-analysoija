@@ -41,11 +41,14 @@ Taulukon koko on m ja jonoon tallennetaan vain taulukon indeksejä, eli jonon ko
 Tilavaativuudeksi saadaan siis O(m + m) = O(m).
 
 
-Kirjoitushetkellä m = 2206.
+~~Kirjoitushetkellä m = 2206.~~
+
+m = 2191. Selvitetty optimisaatio.py ohjelmalla.
 
 # Parannettavaa
 
-m voisi olla pienempi, jos Korttien arvojen vastaavia lukuarvoja viilaisi. Parasta olisi ratkaista pienin m matemaattisesti. Näin tulisi samalla todistettua m olevan pienin mahdollinen.
+~~m voisi olla pienempi, jos Korttien arvojen vastaavia lukuarvoja viilaisi. Parasta olisi ratkaista pienin m matemaattisesti. Näin tulisi samalla todistettua m olevan pienin mahdollinen.~~
+optimisaatio.py ei välttämättä ole löytänyt pienintä mahdollista m arvoa. ts. Ei ole matemaattista todistusta, että optimisaatio.py toimii.
 
 
 Ohjelma selvittää jakajan käden todennäköisyydet, mikä ei ole itsessään hyödyllistä, vaan vaatii vielä pelaajan käden todennäköisyyksien laskemisen, jotta saadaan selville rahanarvoista tietoa tietyn pakan kannattavuudesta pelaajalle.
