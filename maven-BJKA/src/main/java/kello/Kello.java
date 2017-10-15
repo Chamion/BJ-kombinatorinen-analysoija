@@ -1,18 +1,18 @@
 package kello;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
  * @author Chamion
  */
-public class Kello implements KelloRajapinta{
+public class Kello implements KelloRajapinta {
+
+    /**
+     * Kutsuu System.nanoTime-metodia.
+     *
+     * @return System.nanoTime-metodin palautus.
+     */
     @Override
-    public long nanoTime(){
+    public long nanoTime() {
         return System.nanoTime();
     }
 }

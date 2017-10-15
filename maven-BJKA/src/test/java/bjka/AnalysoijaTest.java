@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bjka;
 
 import org.junit.After;
@@ -39,17 +34,12 @@ public class AnalysoijaTest {
     @After
     public void tearDown() {
     }
-
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
     
     @Test
     public void analysoiOnSamaaMieltaWizardinKanssa() {
         // https://wizardofodds.com/games/blackjack/appendix/2b/
-        // Testin toimivuus riippuu wizardofodds.com:in tarkkuudesta
+        // Testin toimivuus riippuu wizardofodds.com:in tarkkuudesta.
+        // Testi ei huomannut bugia, joka aiheutti niin pienen virheen, että viimeinen merkitsevä numero ei muuttunut. Bugi on korjattu.
         double[][] wizardArvot = new double[][]{
             new double[]{0.111914, 0.111669, 0.111945, 0.340014, 0.0348174, 0.0771704, 0.212471},
             new double[]{0.130017, 0.130822, 0.130594, 0.13091, 0.0535035, 0.308682, 0.115473},

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bjka;
 
 /**
@@ -24,6 +19,14 @@ public class TapahtumaSolmu {
     // Jäljellä oleva pakka.
     private final Pakka pakka;
 
+    /**
+     *
+     * @param arvo Jakajan käden arvo.
+     * @param assa Onko jakajan käsi pehmeä, ts. ei kova. Ei aina true, vaikka
+     * kädessä olisi ässä.
+     * @param todennakoisyys Todennäköisyys, että tapahtumasolmuun päädytään.
+     * @param pakka Jäljellä oleva pakka.
+     */
     public TapahtumaSolmu(int arvo, boolean assa, double todennakoisyys, Pakka pakka) {
         this.arvo = arvo;
         this.assa = assa;
@@ -47,12 +50,23 @@ public class TapahtumaSolmu {
         return tVektori;
     }
 
-    // ks. Pakka-olion poistaKortti()
+    /**
+     * Kutsuu pakka-olion poistaKortti-metodia.
+     *
+     * @param kortti poistaKortti-metodin parametri. Poistettava kortti.
+     * @return poistaKortti-metodin palautus. Uusi pakka, jossa on kaikki tämän
+     * solmun pakan kortit, paitsi poistettu kortti.
+     */
     public Pakka seuraavaPakka(int kortti) {
         return this.pakka.poistaKortti(kortti);
     }
 
-    // kasvattaa solmun todennäköisyyttä. Käytetään, kun kaksi tai useampi tapahtumaketju johtaa samaan solmuun.
+    /**
+     * Kasvattaa solmun todennäköisyyttä. Käytetään, kun useampi kuin yksi
+     * tapahtuma johtaa samaan solmuun duplikaattien välttämiseksi.
+     *
+     * @param lisays Todennäköisyys, joka lisätään solmun todennäköisyyteen.
+     */
     public void lisaaTodennakoisyys(double lisays) {
         this.todennakoisyys += lisays;
     }

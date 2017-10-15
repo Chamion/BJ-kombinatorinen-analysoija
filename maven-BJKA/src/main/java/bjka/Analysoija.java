@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bjka;
 
 import tietorakenteet.Jono;
@@ -17,18 +12,28 @@ public class Analysoija {
 
     }
 
+    /**
+     * Laskee Blackjack jakajan käden todennäköisyydet.
+     *
+     * @param alkukortti Jakajan käden ensimmäinen kortti.
+     * @param pakka Jäljellä oleva pakka, josta kortit nostetaan. Alkukortti ei
+     * sisälly pakkaan.
+     * @return Tulosvektori, joka sisältää jakajan käden todennäköisyydet
+     * seuraavassa järjestyksessä. [17, 18, 19, 20, 21, bust, BJ]
+     */
     public double[] analysoi(int alkukortti, Pakka pakka) {
 
         //Päättyneet tapahtumaketjut merkataan tulosvektoriin.
-        double[] tulos = new double[]{0,0,0,0,0,0,0};
+        double[] tulos = new double[]{0, 0, 0, 0, 0, 0, 0};
 
         TapahtumaSolmu alkuSolmu = new TapahtumaSolmu(alkukortti, alkukortti == 1, 1.0, pakka);
 
         // Jonoon lisätään tapahtumasolmut, jotka jatkuvat vielä.
-        Jono jono = new Jono(1000);
+        //Jonon koko selvitettiin kokeilemalla yhä pienempiä arvoja, kunnes testit eivät enää menneet läpi.
+        Jono jono = new Jono(91);
 
         // Tapahtumasolmut talletetaan Map-tietorakenteeseen, jotta alkion olemassaolon tarkistaminen on nopeampaa. O(1) vs. O(n)
-        TapahtumaSolmu[] map = new TapahtumaSolmu[2206];
+        TapahtumaSolmu[] map = new TapahtumaSolmu[2191];
 
         int alkukoodi = 0;
 
@@ -63,6 +68,20 @@ public class Analysoija {
         return tulos;
     }
 
+    /**
+     * Käsittelee yhden lahtoSolmun lapsista. Jos lapsi on päätössolmu, se
+     * merkataan tulosvektoriin. Jos lapsi on tapahtumaSolmu, se tallennetaan
+     * map ja jono rakenteisiin.
+     *
+     * @param tapahtuma uusi kortti, joka nostettiin
+     * @param tapahtumaTodennakoisyys Edellisen solmun todennäköisyyden ja
+     * tapahtuman todennäköisyyden tulo.
+     * @param lahtokoodi Edellisen solmun kokonaislukukoodi
+     * @param lahtoSolmu Edellinen solmu
+     * @param jono Jono, johon uusien solmujen koodit tallennetaan
+     * @param map Taulukko, johon uudet solmut tallennetaan
+     * @param tulos Tulosvektori, johon uudet päätössolmut merkataan
+     */
     private void kasitteleTapahtuma(int tapahtuma, double tapahtumaTodennakoisyys, int lahtokoodi, TapahtumaSolmu lahtoSolmu, Jono jono, TapahtumaSolmu[] map, double[] tulos) {
         // Todennäköisyysvektoreissa 10 on koodattu nollaksi. Käännetään takaisin.
         if (tapahtuma == 0) {
@@ -98,6 +117,14 @@ public class Analysoija {
         }
     }
 
+    /**
+     * Muodostaa solmun kaikki lapset ja käsittelee ne.
+     *
+     * @param lahtokoodi Jonosta poimittu solmun kokonaislukukoodi
+     * @param jono Jono, johon uusien solmujen koodit tallennetaan
+     * @param map Taulukko, johon uudet solmut tallennetaan
+     * @param tulos Tulosvektori, johon uudet päätössolmut merkataan
+     */
     private void kasitteleTapahtumaHaara(int lahtokoodi, Jono jono, TapahtumaSolmu[] map, double[] tulos) {
 
         TapahtumaSolmu lahtoSolmu = map[lahtokoodi];
@@ -110,10 +137,12 @@ public class Analysoija {
     }
 
     /**
-     * Kokonaislukukoodi voidaan käsittää lukujonona, jossa jokainen luku
-     * esittää tietyn arvoisten korttien lukumäärää jakajan kädessä. Esim. {5,
-     * 7} olisi 0000010100 ja {4, 4, 4} olisi 0000003000 Yhteentörmäyksiä ei
-     * tule, sillä samanarvoisia kortteja voi olla korkeintaan 9.
+     * Kokonaislukukoodi on summa, missä jokainen kädessä oleva kortti
+     * alkukorttia lukuunottamatta on lisää tietyn vakion koodiin. Vakio riippuu
+     * kortin arvosta.
+     *
+     * Vakiot on valittu siten, ettei yhteentörmäyksiä tapahdu mahdollisissa
+     * Blackjack käsissä.
      *
      * @param kortti Kortti joka lisätään jakajan käteen.
      * @return Luku, joka tulee lisätä edelliseen koodiin, jotta saadaan uuden
@@ -124,27 +153,27 @@ public class Analysoija {
             case 1:
                 return 1;
             case 2:
-                return 9;
+                return 10;
             case 3:
-                return 31;
+                return 71;
             case 4:
-                return 109;
+                return 237;
             case 5:
-                return 246;
+                return 509;
             case 6:
-                return 602;
+                return 828;
             case 7:
-                return 880;
+                return 1095;
             case 8:
-                return 1158;
+                return 1188;
             case 9:
-                return 1484;
+                return 418;
             default:
-                return 1603;
+                return 115;
         }
     }
-    
-    private int tulosIndeksi(int arvo){
+
+    private int tulosIndeksi(int arvo) {
         return Math.min(22, arvo) - 17;
     }
 

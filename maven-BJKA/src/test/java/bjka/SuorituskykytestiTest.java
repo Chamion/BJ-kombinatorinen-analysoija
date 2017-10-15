@@ -1,17 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bjka;
 
 import kello.Kello;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import testiluokat.Testikello;
@@ -46,7 +39,7 @@ public class SuorituskykytestiTest {
             pakat[i] = alkuPakka.poistaKortti(i+1);
         }
         int[] alkuKortit = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-        Suorituskykytesti.suorituskykytesti(alkuPakka, alkuKortit, pakat, kello);
+        Suorituskykytesti.suorituskykytesti(alkuKortit, pakat, kello);
         String rivi = this.tulostus.toString();
         rivi = rivi.replaceAll("[^\\d]+", "");
         assertEquals(kello.erotus(), Long.parseLong(rivi));
@@ -62,7 +55,7 @@ public class SuorituskykytestiTest {
         int[] alkuKortit = new int[]{1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
         boolean keskeytys = false;
         try{
-            Suorituskykytesti.suorituskykytesti(alkuPakka, alkuKortit, pakat, new Kello());
+            Suorituskykytesti.suorituskykytesti(alkuKortit, pakat, new Kello());
         } catch(NullPointerException e){
             keskeytys = true;
         }

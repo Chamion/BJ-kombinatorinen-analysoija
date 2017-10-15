@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bjka;
 
 /**
@@ -68,19 +63,19 @@ public class Pakka {
     public int getKoko() {
         return this.koko;
     }
-    
+
     @Override
-    public boolean equals(Object o){
-        if(o.getClass()==this.getClass()){
+    public boolean equals(Object o) {
+        if (o.getClass() == this.getClass()) {
             return this.equals((Pakka) o);
         } else {
             return false;
         }
     }
-    
-    private boolean equals(Pakka o){
-        for(int i = 0; i <= 9; i++){
-            if(this.lukumaarat[i] != o.getLukukumaarat()[i]){
+
+    private boolean equals(Pakka o) {
+        for (int i = 0; i <= 9; i++) {
+            if (this.lukumaarat[i] != o.getLukukumaarat()[i]) {
                 return false;
             }
         }
