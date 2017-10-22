@@ -11,7 +11,12 @@ Testi siis painottaa kaikkia alkukortteja yhtä tärkeinä, kuten tekee myös tosiel
 Käytetyllä pakalla ei ole suurta merkitystä suorituskykyyn. Pakka voi siis olla mikä tahansa.
 
 
-Suorituskykytestin suorittaminen kesti ohjelmalta ajan väliltä 5ms - 10ms, mutta normaalit ajat olivat väliltä 6ms - 8ms.
+~~Suorituskykytestin suorittaminen kesti ohjelmalta ajan väliltä 5ms - 10ms, mutta normaalit ajat olivat väliltä 6ms - 8ms.~~
+
+
+Suorituskykytesti kestää kotikoneellani n. 4ms +- 0.2ms.
+Aika on huomattavasti nopeampi, kuin optimoimattoman, Javan valmiita tietorakenteita käyttävän toteutuksen ajat.
+Keskimäärin optimointi säästää arviolta 40% suoritusajassa.
 
 # Yksikkötestit
 

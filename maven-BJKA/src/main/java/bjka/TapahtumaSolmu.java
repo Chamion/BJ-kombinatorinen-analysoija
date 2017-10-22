@@ -6,26 +6,26 @@ package bjka;
  */
 public class TapahtumaSolmu {
 
-    // Jakajan käden arvo.
+    // Jakajan kaden arvo.
     private final int arvo;
 
-    // Onko jakajan käsi pehmeä, ts. ei kova.
-    // Ei aina true, vaikka kädessä olisi ässä.
+    // Onko jakajan kasi pehmea, ts. ei kova.
+    // Ei aina true, vaikka kadessa olisi assa.
     private final boolean assa;
 
-    // Todennäköisyys, että tapahtumasolmuun päädytään.
+    // Todennakoisyys, etta tapahtumasolmuun paadytaan.
     private double todennakoisyys;
 
-    // Jäljellä oleva pakka.
+    // Jaljella oleva pakka.
     private final Pakka pakka;
 
     /**
      *
-     * @param arvo Jakajan käden arvo.
-     * @param assa Onko jakajan käsi pehmeä, ts. ei kova. Ei aina true, vaikka
-     * kädessä olisi ässä.
-     * @param todennakoisyys Todennäköisyys, että tapahtumasolmuun päädytään.
-     * @param pakka Jäljellä oleva pakka.
+     * @param arvo Jakajan kaden arvo.
+     * @param assa Onko jakajan kasi pehmea, ts. ei kova. Ei aina true, vaikka
+     * kadessa olisi assa.
+     * @param todennakoisyys Todennakoisyys, etta tapahtumasolmuun paadytaan.
+     * @param pakka Jaljella oleva pakka.
      */
     public TapahtumaSolmu(int arvo, boolean assa, double todennakoisyys, Pakka pakka) {
         this.arvo = arvo;
@@ -35,12 +35,12 @@ public class TapahtumaSolmu {
     }
 
     /**
-     * Todennäköisyysvektori tulee Pakka-olion
-     * todennäköisyysVektori()-metodilla. Kaikki vektorin todennäköisyydet
-     * kerrotaan solmun todennäköisyydellä.
+     * Todennakoisyysvektori tulee Pakka-olion
+     * todennakoisyysVektori()-metodilla. Kaikki vektorin todennakoisyydet
+     * kerrotaan solmun todennakoisyydella.
      *
-     * @return todennäköisyysvektori, joka esittää seuraavien tapahtumasolmujen
-     * todennäköisyyksiä tämän solmun kautta.
+     * @return todennakoisyysvektori, joka esittaa seuraavien tapahtumasolmujen
+     * todennakoisyyksia taman solmun kautta.
      */
     public double[] laskeTodennakoisyydet() {
         double[] tVektori = this.pakka.todennakoisyysVektori();
@@ -54,7 +54,7 @@ public class TapahtumaSolmu {
      * Kutsuu pakka-olion poistaKortti-metodia.
      *
      * @param kortti poistaKortti-metodin parametri. Poistettava kortti.
-     * @return poistaKortti-metodin palautus. Uusi pakka, jossa on kaikki tämän
+     * @return poistaKortti-metodin palautus. Uusi pakka, jossa on kaikki taman
      * solmun pakan kortit, paitsi poistettu kortti.
      */
     public Pakka seuraavaPakka(int kortti) {
@@ -62,10 +62,10 @@ public class TapahtumaSolmu {
     }
 
     /**
-     * Kasvattaa solmun todennäköisyyttä. Käytetään, kun useampi kuin yksi
-     * tapahtuma johtaa samaan solmuun duplikaattien välttämiseksi.
+     * Kasvattaa solmun todennakoisyytta. Kaytetaan, kun useampi kuin yksi
+     * tapahtuma johtaa samaan solmuun duplikaattien valttamiseksi.
      *
-     * @param lisays Todennäköisyys, joka lisätään solmun todennäköisyyteen.
+     * @param lisays Todennakoisyys, joka lisataan solmun todennakoisyyteen.
      */
     public void lisaaTodennakoisyys(double lisays) {
         this.todennakoisyys += lisays;

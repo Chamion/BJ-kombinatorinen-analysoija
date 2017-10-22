@@ -20,7 +20,7 @@ TapahtumaSolmu koodataan taulukkoon kokonaislukukoodin avulla. Jonoon merkitää
 
 Kokonaislukukoodi saadaan antamalla jokaiselle jakajan käden kortille lukuarvo kortin arvon perusteella (alkukorttia lukuunottamatta) ja laskemalla nämä lukuarvot yhteen.
 Korttien arvoja vastaavat lukuarvot on valittu siten, että erilaisten käsien lukuarvojen summat eivät ole samat millään jakajan käsillä, joiden arvo on 16 tai pienempi.
-Käytännössä keksin ne yritys-erehdys menetelmällä.
+~~Käytännössä keksin ne yritys-erehdys menetelmällä.~~ optimisaatio.py-apulohjelma selvitti sopivat arvot.
 
 
 Lähtösolmu on käsiteltävä erikseen Blackjack-erikoistapauksen takia. Blackjack todennäköisyydet lasketaan kovakoodatulla logiikalla lähtösolmun käsittelyssä.

@@ -13,23 +13,23 @@ public class Analysoija {
     }
 
     /**
-     * Laskee Blackjack jakajan käden todennäköisyydet.
+     * Laskee Blackjack jakajan kaden todennakoisyydet.
      *
-     * @param alkukortti Jakajan käden ensimmäinen kortti.
-     * @param pakka Jäljellä oleva pakka, josta kortit nostetaan. Alkukortti ei
-     * sisälly pakkaan.
-     * @return Tulosvektori, joka sisältää jakajan käden todennäköisyydet
-     * seuraavassa järjestyksessä. [17, 18, 19, 20, 21, bust, BJ]
+     * @param alkukortti Jakajan kaden ensimmainen kortti.
+     * @param pakka Jaljella oleva pakka, josta kortit nostetaan. Alkukortti ei
+     * sisally pakkaan.
+     * @return Tulosvektori, joka sisaltaa jakajan kaden todennakoisyydet
+     * seuraavassa jarjestyksessa. [17, 18, 19, 20, 21, bust, BJ]
      */
     public double[] analysoi(int alkukortti, Pakka pakka) {
 
-        //Päättyneet tapahtumaketjut merkataan tulosvektoriin.
+        //Paattyneet tapahtumaketjut merkataan tulosvektoriin.
         double[] tulos = new double[]{0, 0, 0, 0, 0, 0, 0};
 
         TapahtumaSolmu alkuSolmu = new TapahtumaSolmu(alkukortti, alkukortti == 1, 1.0, pakka);
 
-        // Jonoon lisätään tapahtumasolmut, jotka jatkuvat vielä.
-        //Jonon koko selvitettiin kokeilemalla yhä pienempiä arvoja, kunnes testit eivät enää menneet läpi.
+        // Jonoon lisataan tapahtumasolmut, jotka jatkuvat viela.
+        //Jonon koko selvitettiin kokeilemalla yha pienempia arvoja, kunnes testit eivat enaa menneet lapi.
         Jono jono = new Jono(91);
 
         // Tapahtumasolmut talletetaan Map-tietorakenteeseen, jotta alkion olemassaolon tarkistaminen on nopeampaa. O(1) vs. O(n)
@@ -37,7 +37,7 @@ public class Analysoija {
 
         int alkukoodi = 0;
 
-        // Käsitellään ensimmäinen tapahtumasolmu erikseen BJ-erikoistapauksen takia.
+        // Kasitellaan ensimmainen tapahtumasolmu erikseen BJ-erikoistapauksen takia.
         double[] alkuTVektori = alkuSolmu.laskeTodennakoisyydet();
         if (alkuSolmu.getAssa()) {
             tulos[6] += alkuTVektori[0];
@@ -59,7 +59,7 @@ public class Analysoija {
             kasitteleTapahtuma(i, alkuTVektori[i], alkukoodi, alkuSolmu, jono, map, tulos);
         }
 
-        // Silmukka käy läpi kaikki mahdolliset tapahtumaketjut.
+        // Silmukka kay lapi kaikki mahdolliset tapahtumaketjut.
         while (!jono.isEmpty()) {
             int seuraavaKoodi = jono.get();
             kasitteleTapahtumaHaara(seuraavaKoodi, jono, map, tulos);
@@ -69,28 +69,28 @@ public class Analysoija {
     }
 
     /**
-     * Käsittelee yhden lahtoSolmun lapsista. Jos lapsi on päätössolmu, se
+     * Kasittelee yhden lahtoSolmun lapsista. Jos lapsi on paatossolmu, se
      * merkataan tulosvektoriin. Jos lapsi on tapahtumaSolmu, se tallennetaan
      * map ja jono rakenteisiin.
      *
      * @param tapahtuma uusi kortti, joka nostettiin
-     * @param tapahtumaTodennakoisyys Edellisen solmun todennäköisyyden ja
-     * tapahtuman todennäköisyyden tulo.
+     * @param tapahtumaTodennakoisyys Edellisen solmun todennakoisyyden ja
+     * tapahtuman todennakoisyyden tulo.
      * @param lahtokoodi Edellisen solmun kokonaislukukoodi
      * @param lahtoSolmu Edellinen solmu
      * @param jono Jono, johon uusien solmujen koodit tallennetaan
      * @param map Taulukko, johon uudet solmut tallennetaan
-     * @param tulos Tulosvektori, johon uudet päätössolmut merkataan
+     * @param tulos Tulosvektori, johon uudet paatossolmut merkataan
      */
     private void kasitteleTapahtuma(int tapahtuma, double tapahtumaTodennakoisyys, int lahtokoodi, TapahtumaSolmu lahtoSolmu, Jono jono, TapahtumaSolmu[] map, double[] tulos) {
-        // Todennäköisyysvektoreissa 10 on koodattu nollaksi. Käännetään takaisin.
+        // Todennakoisyysvektoreissa 10 on koodattu nollaksi. Kaannetaan takaisin.
         if (tapahtuma == 0) {
             tapahtuma = 10;
         }
 
         int uusiArvo = lahtoSolmu.getArvo() + tapahtuma;
 
-        // Jos jakaja jää, kirjataan tulos ja käsittely päättyy.
+        // Jos jakaja jaa, kirjataan tulos ja kasittely paattyy.
         if (lahtoSolmu.getAssa() || tapahtuma == 1) {
             if (uusiArvo >= 7 && uusiArvo <= 11) {
                 tulos[tulosIndeksi(uusiArvo + 10)] += tapahtumaTodennakoisyys;
@@ -108,44 +108,44 @@ public class Analysoija {
         boolean uusiAssa = lahtoSolmu.getAssa() || tapahtuma == 1;
 
         if (map[uusiKoodi] != null) {
-            // Jos tapahtumasolmu on jo Map-oliossa, ei lisätä sitä uudestaan, vaan päivitetään vain sen todennäköisyys.
+            // Jos tapahtumasolmu on jo Map-oliossa, ei lisata sita uudestaan, vaan paivitetaan vain sen todennakoisyys.
             map[uusiKoodi].lisaaTodennakoisyys(tapahtumaTodennakoisyys);
         } else {
-            // Jos tapahtumasolmu ei ole Map-oliossa, lisätään se myös jonoon käsiteltäväksi.
+            // Jos tapahtumasolmu ei ole Map-oliossa, lisataan se myos jonoon kasiteltavaksi.
             map[uusiKoodi] = new TapahtumaSolmu(uusiArvo, uusiAssa, tapahtumaTodennakoisyys, lahtoSolmu.seuraavaPakka(tapahtuma));
             jono.lisaa(uusiKoodi);
         }
     }
 
     /**
-     * Muodostaa solmun kaikki lapset ja käsittelee ne.
+     * Muodostaa solmun kaikki lapset ja kasittelee ne.
      *
      * @param lahtokoodi Jonosta poimittu solmun kokonaislukukoodi
      * @param jono Jono, johon uusien solmujen koodit tallennetaan
      * @param map Taulukko, johon uudet solmut tallennetaan
-     * @param tulos Tulosvektori, johon uudet päätössolmut merkataan
+     * @param tulos Tulosvektori, johon uudet paatossolmut merkataan
      */
     private void kasitteleTapahtumaHaara(int lahtokoodi, Jono jono, TapahtumaSolmu[] map, double[] tulos) {
 
         TapahtumaSolmu lahtoSolmu = map[lahtokoodi];
         double[] tVektori = lahtoSolmu.laskeTodennakoisyydet();
 
-        // Käydään läpi ja käsitellään kaikki mahdolliset tapahtumat: 10, 1, 2, 3, 4, 5, 6, 7, 8, 9
+        // Kaydaan lapi ja kasitellaan kaikki mahdolliset tapahtumat: 10, 1, 2, 3, 4, 5, 6, 7, 8, 9
         for (int i = 0; i <= 9; i++) {
             kasitteleTapahtuma(i, tVektori[i], lahtokoodi, lahtoSolmu, jono, map, tulos);
         }
     }
 
     /**
-     * Kokonaislukukoodi on summa, missä jokainen kädessä oleva kortti
-     * alkukorttia lukuunottamatta on lisää tietyn vakion koodiin. Vakio riippuu
+     * Kokonaislukukoodi on summa, missa jokainen kadessa oleva kortti
+     * alkukorttia lukuunottamatta on lisaa tietyn vakion koodiin. Vakio riippuu
      * kortin arvosta.
      *
-     * Vakiot on valittu siten, ettei yhteentörmäyksiä tapahdu mahdollisissa
-     * Blackjack käsissä.
+     * Vakiot on valittu siten, ettei yhteentormayksia tapahdu mahdollisissa
+     * Blackjack kasissa.
      *
-     * @param kortti Kortti joka lisätään jakajan käteen.
-     * @return Luku, joka tulee lisätä edelliseen koodiin, jotta saadaan uuden
+     * @param kortti Kortti joka lisataan jakajan kateen.
+     * @return Luku, joka tulee lisata edelliseen koodiin, jotta saadaan uuden
      * tapahtumasolmun koodi.
      */
     private int koodi(int kortti) {

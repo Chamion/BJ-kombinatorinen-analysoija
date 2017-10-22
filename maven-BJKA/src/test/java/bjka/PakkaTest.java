@@ -72,7 +72,7 @@ public class PakkaTest {
         nollaPakka = new Pakka(new int[]{0, 1, 0, 0, 0, 0, 0, 2, 0, 0});
         Assert.assertArrayEquals(new double[]{0, (double) 1/3, 0, 0, 0, 0, 0, (double) 2/3, 0, 0}, nollaPakka.todennakoisyysVektori(), 0.0000001);
         
-        // 0 kortin pakalla ei testata. Tyhjästä pakasta nostaminen on järjetön tilanne, joten ei voida olettaa järjellistä vastausta.
+        // 0 kortin pakalla ei testata. Tyhjasta pakasta nostaminen on jarjeton tilanne, joten ei voida olettaa jarjellista vastausta.
         
     }
     

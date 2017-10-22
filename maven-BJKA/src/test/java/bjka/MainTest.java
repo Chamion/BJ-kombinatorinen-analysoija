@@ -33,12 +33,12 @@ public class MainTest {
     @Test
     public void suorituskykyKutsutaanErikoissyotteella(){
         Main.main(new String[]{"suorituskyky"});
-        assertTrue(tulostus.toString().matches("^Todennäköisyyksien laskeminen jokaisella alkukortilla kesti \\d+ nanosekuntia.\r\n$"));
+        assertTrue(tulostus.toString().matches("^Todennakoisyyksien laskeminen jokaisella alkukortilla kesti \\d+ nanosekuntia.\r\n$"));
     }
     
     @Test
     public void mainAntaaSamatArvotKuinAnalysoija(){
-        Main.main(new String[]{"src/test/java/testisyötteet/testisyöte1.txt"});
+        Main.main(new String[]{"src/test/java/testisyotteet/testisyote1.txt"});
         String[] rivit = tulostus.toString().split("\r\n");
         double[] mainTulos = new double[7];
         for(String rivi : rivit) {
@@ -64,10 +64,10 @@ public class MainTest {
     
     @Test
     public void tulostuksenMuotoOnOikea(){
-        Main.main(new String[]{"src/test/java/testisyötteet/testisyöte1.txt"});
+        Main.main(new String[]{"src/test/java/testisyotteet/testisyote1.txt"});
         String[] rivit = tulostus.toString().split("\r\n");
         assertEquals(10, rivit.length);
-        assertTrue(rivit[0].matches("^Jakajan käden todennäköisyydet$"));
+        assertTrue(rivit[0].matches("^Jakajan kaden todennakoisyydet$"));
         assertTrue(rivit[1].matches("^Alkukortti: ([1-9]|10)$"));
         assertTrue(rivit[2].matches("^Pakka: \\{(((,|, |)[1-9]|10):( |)\\d+){10}\\}$"));
         assertTrue(rivit[3].matches("^BJ:( |)[\\d.]+$"));
@@ -81,59 +81,59 @@ public class MainTest {
     
     @Test
     public void tiedostoaEiLoytynyt(){
-        Main.main(new String[]{"src/test/java/testisyötteet/olematon_tiedosto.txt"});
-        assertEquals("Tiedostoa ei löytynyt: src/test/java/testisyötteet/olematon_tiedosto.txt\r\n", tulostus.toString());
+        Main.main(new String[]{"src/test/java/testisyotteet/olematon_tiedosto.txt"});
+        assertEquals("Tiedostoa ei loytynyt: src/test/java/testisyotteet/olematon_tiedosto.txt\r\n", tulostus.toString());
     }
     
     @Test
     public void EnsimmaistaRiviaEiLoytynyt(){
-        Main.main(new String[]{"src/test/java/testisyötteet/tyhjä.txt"});
-        assertEquals("Ensimmäistä riviä ei löytynyt.\r\n", tulostus.toString());
+        Main.main(new String[]{"src/test/java/testisyotteet/tyhja.txt"});
+        assertEquals("Ensimmaista rivia ei loytynyt.\r\n", tulostus.toString());
     }
     
     @Test
     public void EnsimmainenRiviEiOleKokonaisluku(){
-        Main.main(new String[]{"src/test/java/testisyötteet/huono_eka_rivi.txt"});
-        assertEquals("Ensimmäinen rivi ei ole kokonaisluku.\r\n", tulostus.toString());
+        Main.main(new String[]{"src/test/java/testisyotteet/huono_eka_rivi.txt"});
+        assertEquals("Ensimmainen rivi ei ole kokonaisluku.\r\n", tulostus.toString());
     }
     
     @Test
     public void alkukorttiOnLiianSuuri(){
-        Main.main(new String[]{"src/test/java/testisyötteet/huono_alkukortti1.txt"});
-        assertEquals("Ensimmäinen rivi ei esitä sopivaa alkukorttia.\r\n", tulostus.toString());
+        Main.main(new String[]{"src/test/java/testisyotteet/huono_alkukortti1.txt"});
+        assertEquals("Ensimmainen rivi ei esita sopivaa alkukorttia.\r\n", tulostus.toString());
     }
     
     @Test
     public void alkukorttiOnLiianPieni(){
-        Main.main(new String[]{"src/test/java/testisyötteet/huono_alkukortti2.txt"});
-        assertEquals("Ensimmäinen rivi ei esitä sopivaa alkukorttia.\r\n", tulostus.toString());
+        Main.main(new String[]{"src/test/java/testisyotteet/huono_alkukortti2.txt"});
+        assertEquals("Ensimmainen rivi ei esita sopivaa alkukorttia.\r\n", tulostus.toString());
     }
     
     @Test
     public void vainYksiRivi(){
-        Main.main(new String[]{"src/test/java/testisyötteet/yksi_rivi.txt"});
-        assertEquals("Toista riviä ei löytynyt.\r\n", tulostus.toString());
+        Main.main(new String[]{"src/test/java/testisyotteet/yksi_rivi.txt"});
+        assertEquals("Toista rivia ei loytynyt.\r\n", tulostus.toString());
     }
     
     @Test
     public void liianVahanArgumentteja(){
-        Main.main(new String[]{"src/test/java/testisyötteet/vajaa_toinen_rivi.txt"});
-        assertEquals("Toisessa rivissä on liian vähän argumentteja.\r\n", tulostus.toString());
+        Main.main(new String[]{"src/test/java/testisyotteet/vajaa_toinen_rivi.txt"});
+        assertEquals("Toisessa rivissa on liian vahan argumentteja.\r\n", tulostus.toString());
     }
     
     @Test
     public void huonoToinenRivi(){
-        Main.main(new String[]{"src/test/java/testisyötteet/huono_toinen_rivi.txt"});
-        assertEquals("Toisen rivin argumentti ei sisältänyt lukua.\r\n", tulostus.toString());
+        Main.main(new String[]{"src/test/java/testisyotteet/huono_toinen_rivi.txt"});
+        assertEquals("Toisen rivin argumentti ei sisaltanyt lukua.\r\n", tulostus.toString());
     }
     
     @Test
     public void oletussyote(){
-        File tuhottava = new File("syöte.txt");
+        File tuhottava = new File("syote.txt");
         FileOutputStream oFile;
         try {
             tuhottava.createNewFile();
-            oFile = new FileOutputStream("syöte.txt", false);
+            oFile = new FileOutputStream("syote.txt", false);
             oFile.write("2\r\n".getBytes());
             oFile.write("32, 8, 7, 8, 8, 8, 8, 8, 8, 8".getBytes());
             oFile.close();

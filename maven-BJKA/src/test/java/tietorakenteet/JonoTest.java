@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package tietorakenteet;
 
 import org.junit.Before;
@@ -43,7 +38,7 @@ public class JonoTest {
 
     @Test
     public void taysiJonoYlikirjoittaaVanhan() {
-        //Ts. testataan, ettei jono varaa ylimääräistä tilaa.
+        //Ts. testataan, ettei jono varaa ylimaaraista tilaa.
         Jono pieniJono = new Jono(2);
         pieniJono.lisaa(0);
         pieniJono.lisaa(1);
@@ -77,14 +72,4 @@ public class JonoTest {
         this.jono.get();
         assertTrue(this.jono.isEmpty());
     }
-    
-    /*@Test
-    public void EiIsEmptyKunAlkioita(){
-        this.jono.lisaa(3);
-        assertFalse(this.jono.isEmpty());
-        Jono pieniJono = new Jono(2);
-        pieniJono.lisaa(3);
-        pieniJono.lisaa(3);
-        assertFalse(pieniJono.isEmpty());
-    }*/
 }

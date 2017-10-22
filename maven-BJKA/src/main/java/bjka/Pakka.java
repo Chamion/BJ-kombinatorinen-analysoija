@@ -7,13 +7,13 @@ package bjka;
 public class Pakka {
 
     /*
-    Taulukon arvot esittävät eri arvoisten korttien lukumääriä.
-    Taulukon arvot ovat aina järjestyksessä 10, 1, 2, 3, 4, 5, 6, 7, 8, 9
-    Esim. 10-arvoisten korttien lukumäärä on indeksissä 0 ja 7-arvoisten korttien lukumärä indeksissä 7.
+    Taulukon arvot esittavat eri arvoisten korttien lukumaaria.
+    Taulukon arvot ovat aina jarjestyksessa 10, 1, 2, 3, 4, 5, 6, 7, 8, 9
+    Esim. 10-arvoisten korttien lukumaara on indeksissa 0 ja 7-arvoisten korttien lukumara indeksissa 7.
      */
     private final int[] lukumaarat;
 
-    // Korttien yhteismäärä.
+    // Korttien yhteismaara.
     private int koko;
 
     public Pakka(int[] lukumaarat) {
@@ -26,10 +26,10 @@ public class Pakka {
 
     /**
      * Laskee ja palauttaa taulukon, jossa korttien arvot ovat samassa
-     * järjestyksessä kuin lukumäärät-taulukossa. Todennäköisyysvektorin lukujen
+     * jarjestyksessa kuin lukumaarat-taulukossa. Todennakoisyysvektorin lukujen
      * summa on 1.
      *
-     * @return Vektori, joka esittää eri arvoisten korttien todennäköisyyksiä
+     * @return Vektori, joka esittaa eri arvoisten korttien todennakoisyyksia
      * tulla nostetuksi pakasta seuraavana.
      */
     public double[] todennakoisyysVektori() {
@@ -45,13 +45,13 @@ public class Pakka {
      * parametrina annettu kortti.
      *
      * @param kortti Kortti, joka poistetaan pakasta.
-     * @return Pakka, joka jää jäljelle kortin poistamisen jälkeen.
+     * @return Pakka, joka jaa jaljelle kortin poistamisen jalkeen.
      */
     public Pakka poistaKortti(int kortti) {
         kortti = kortti % 10;
         int[] uudetLukumaarat = this.lukumaarat.clone();
 
-        // Lukumäärä voi mennä negatiiviseksi. Tulos on kuitenkin aina oikein (negatiivinen todennäköisyys kerrotaan aina nollalla).
+        // Lukumaara voi menna negatiiviseksi. Tulos on kuitenkin aina oikein (negatiivinen todennakoisyys kerrotaan aina nollalla).
         uudetLukumaarat[kortti] -= 1;
         return new Pakka(uudetLukumaarat);
     }

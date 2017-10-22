@@ -13,15 +13,15 @@ import java.util.Scanner;
 public class Main {
 
     /**
-     * Main metodi. Ks. dokumentaation käyttöohje.
+     * Main metodi. Ks. dokumentaation kayttoohje.
      *
-     * @param args komentorivillä annettu syöte.
+     * @param args komentorivilla annettu syote.
      */
     public static void main(String[] args) {
         //Oletusarvo.
-        String syotePath = "syöte.txt";
+        String syotePath = "syote.txt";
 
-        //Jos käyttäjä antoi syötteen.
+        //Jos kayttaja antoi syotteen.
         if (args.length > 0) {
             //Erikoistapaus "suorituskyky" suorittaa suorituskykytestin.
             if (args[0].equals("suorituskyky")) {
@@ -35,7 +35,7 @@ public class Main {
                 return;
             }
 
-            //Oletusarvo korvataan syötteellä.
+            //Oletusarvo korvataan syotteella.
             syotePath = args[0];
         }
 
@@ -44,56 +44,56 @@ public class Main {
         try {
             lukija = new Scanner(syote);
         } catch (FileNotFoundException e) {
-            System.out.println("Tiedostoa ei löytynyt: " + syotePath);
+            System.out.println("Tiedostoa ei loytynyt: " + syotePath);
             return;
         }
 
-        //Ensimmäinen rivi syötetiedostossa.
+        //Ensimmainen rivi syotetiedostossa.
         int alkukortti;
         try {
             String rivi = lukija.nextLine();
             alkukortti = Integer.parseInt(rivi);
         } catch (NoSuchElementException e) {
-            System.out.println("Ensimmäistä riviä ei löytynyt.");
+            System.out.println("Ensimmaista rivia ei loytynyt.");
             return;
         } catch (NumberFormatException e) {
-            System.out.println("Ensimmäinen rivi ei ole kokonaisluku.");
+            System.out.println("Ensimmainen rivi ei ole kokonaisluku.");
             return;
         }
         if (alkukortti <= 0 || alkukortti > 10) {
-            System.out.println("Ensimmäinen rivi ei esitä sopivaa alkukorttia.");
+            System.out.println("Ensimmainen rivi ei esita sopivaa alkukorttia.");
             return;
         }
 
-        //Toinen rivi syötetiedostossa.
+        //Toinen rivi syotetiedostossa.
         int[] lukumaarat = new int[10];
         try {
             String rivi = lukija.nextLine();
-            //Poistetaan kaikki merkit, jotka eivät ole ',' tai lukuja.
+            //Poistetaan kaikki merkit, jotka eivat ole ',' tai lukuja.
             rivi = rivi.replaceAll("[^\\d,]", "");
             String[] sanat = rivi.split(",");
             for (int i = 0; i < 10; i++) {
                 lukumaarat[i] = Integer.parseInt(sanat[i]);
             }
         } catch (NoSuchElementException e) {
-            System.out.println("Toista riviä ei löytynyt.");
+            System.out.println("Toista rivia ei loytynyt.");
             return;
         } catch (IndexOutOfBoundsException e) {
-            System.out.println("Toisessa rivissä on liian vähän argumentteja.");
+            System.out.println("Toisessa rivissa on liian vahan argumentteja.");
             return;
         } catch (NumberFormatException e) {
-            System.out.println("Toisen rivin argumentti ei sisältänyt lukua.");
+            System.out.println("Toisen rivin argumentti ei sisaltanyt lukua.");
             return;
         }
 
         lukija.close();
         Pakka pakka = new Pakka(lukumaarat);
         Analysoija analysoija = new Analysoija();
-        //Lasketaan todennäköisyydet.
+        //Lasketaan todennakoisyydet.
         double[] tulos = analysoija.analysoi(alkukortti, pakka);
 
         //Printout.
-        System.out.println("Jakajan käden todennäköisyydet");
+        System.out.println("Jakajan kaden todennakoisyydet");
         System.out.println("Alkukortti: " + alkukortti);
         System.out.println("Pakka: {"
                 + "10: " + lukumaarat[0]

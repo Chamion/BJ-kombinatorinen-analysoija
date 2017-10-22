@@ -9,13 +9,13 @@ java -jar BJKA.jar
 
 
 
-Oletusarvoisesti ohjelma etsii tiedostoa syöte.txt hakemistosta, jossa olet.
+Oletusarvoisesti ohjelma etsii tiedostoa syote.txt hakemistosta, jossa olet.
 Jos haluat käyttää jotain muuta syötettä, anna syötetiedosto argumenttina.
 
 
 Esim.
 ```
-java -jar BJKA.jar toinen_syöte.txt
+java -jar BJKA.jar toinen_syote.txt
 ```
 
 ## Syötetiedoston sisältö
