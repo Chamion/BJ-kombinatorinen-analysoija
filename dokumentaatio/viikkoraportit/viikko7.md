@@ -1,6 +1,6 @@
 # Tuntikirjanpito
 
-22.10.2017 - 1.5h -  StackExchange kahlausta.
+22.10.2017 - 1.5h -  StackOverflow kahlausta.
 
 
 22.10.2017 - 1h - Tyydyttämätön hakkausratkaisu ääkkösongelmaan.
